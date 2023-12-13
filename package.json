@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JustinFrost47",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.2",
