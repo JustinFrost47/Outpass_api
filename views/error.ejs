@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MLRIT Hostel Outpass System</title>
+  <style>
+    /* CSS styles for the website layout and elements */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+
+    header {
+      background-color: #286e46;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    /* form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+*/
+    .btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    } 
+
+    .output {
+      max-width: 500px;
+      margin-top: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+
+    footer {
+      background-color: #333333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div  role="alert">
+    <h4 class="alert-heading"><%= status %> Error <%= message %>  </h4>
+    <p><%= stack  %> </p>
+    <hr>
+    <p >reload your page. Everything will be just fine.</p>
+  </div>
+
+
+  <footer>
+    <!-- <p style="margin: 0;">&copy; 2023 MLRIT. All rights reserved.</p> -->
+    <p style="margin: 0;">&copy; Anime for life</p>
+  </footer>
+</body>
+</html>

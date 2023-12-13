@@ -23,6 +23,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/outpassmp')
 const Outpass = require('./models/outpass')
 const Student =  require('./models/student')
 
+const appError = require("./utilities/appError")
+const asyncWrapper = require("./utilities/asyncWrapper")
+
 const port = 3333;
 
 
@@ -35,7 +38,7 @@ app.get('/outpass/new', (req, res) => {
 })
 
 
-app.post('/outpass/new', async (req, res) => {
+app.post('/outpass/new', asyncWrapper(async (req, res) => {
 
     try {
 
@@ -67,18 +70,19 @@ app.post('/outpass/new', async (req, res) => {
         console.log(student)
         res.status(200).redirect('/');
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+        // error handler middleware handles all errors now
+        // res.status(500).send('Internal Server Error');
+        // throw new appError('Internal Server Error', 500)
     }
 
-})
+}))
 
-app.get('/outpass/search', async (req, res) => {
+app.get('/outpass/search', asyncWrapper((req, res) => {
 
     res.render('search')
-})
+}))
 
-app.post('/outpass/search', async (req, res) => {
+app.post('/outpass/search', asyncWrapper( async (req, res) => {
 
     try {
 
@@ -106,10 +110,11 @@ app.post('/outpass/search', async (req, res) => {
 
     // res.status(200).send('Outpass submitted successfully.');
 } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
+    // error handler middleware handles all errors now
+    //  res.status(500).send('Internal Server Error');
+    // throw new appError('Internal Server Error', 500)
 }
-})
+}))
 
 // app.get('/test', async (req, res) => {
 
@@ -135,6 +140,24 @@ app.post('/outpass/search', async (req, res) => {
 //     .populate('outpasses')
 //     .then(student => console.log(student))
 // })
+
+
+//404 route
+
+app.all("*", (req, res) => {
+    throw new appError("page not found", 404)
+})
+
+//error handling route
+
+app.use((err, req, res, next) => {
+    
+    const { message= "something went wrong", status= 500, stack } = err
+
+    console.log(`${status}  ${message}`)
+    res.status(status).render("error", { status, message, stack})
+})
+
 
 app.listen(port, () => {
     console.log(`listening from port:${port}`)
